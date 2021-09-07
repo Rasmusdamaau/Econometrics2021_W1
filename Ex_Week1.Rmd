@@ -1,0 +1,43 @@
+---
+title: "Exercises Week 1"
+author: "Econometrics"
+output: pdf_document
+---
+
+\begin{enumerate}
+	\item \textbf{Ex. 2.6 in ETM}: Prove that, if the $k$ columns of $X$ are linearly independent, each vector $z$ in $\mathcal{S}(X)$ can be expressed as $Xb$ for one and only one $k$-vector $b$. Hint: Suppose that there are two different vectors, $b_1$ and $b_2$, such that $z = Xb_i$, $i = 1, 2$, and show that this implies that the columns of $X$ are linearly dependent.
+	
+	\item \textbf{Ex. 2.9 in ETM}: Prove algebraically that $P_XM_X = O$. Use only the definition that $P_X+M_X=I$, and the idempotency of $P_X$.
+	
+	\item \textbf{Ex. 2.16 in ETM}: Consider the following linear regression: 
+	$$y = X_1\beta_1 +X_2\beta_2 + u.$$
+	where $y$ is $n\times 1$, $X_1$ is $n\times 1$, and $X_2$ is $n\times k2$. Let $\hat{\beta_1}$ and $\hat{\beta_2}$ be the OLS
+	parameter estimates from running this regression. Now consider the following regressions, all to be estimated by OLS
+	\begin{enumerate}
+		\item $y = X_2\beta_2 + u;$
+		\item $P_1y = X_2\beta_2 + u; $
+		\item $P_1y = P_1X_2\beta_2 + u;$
+		\item $P_Xy = X_1\beta_1 +X_2\beta_2 + u$
+		\item $P_Xy = X_2\beta_2 + u;$
+		\item $M_{X_1}y = X_2\beta_2 + u;$
+		\item$	M_{X_1}y =M_{X_1}X_2\beta_2 + u;$
+		\item$	M_{X_1}y = X_1\beta_1 +M_{X_1}X_2\beta_2 + u;$
+		\item$	M_{X_1}y =M_{X_1}X_1\beta_1 +M_{X_1}X_2\beta_2 + u;$
+		\item $P_Xy =M_{X_1}X_2\beta_2 + u.$
+	\end{enumerate}
+	
+	\item \textbf{Ex. 1.23 in ETM}: The dataset \textit{consumption} in the \textit{Ecdat} R-package contains data on real personal disposable income and consumption expenditures in Canada, seasonally adjusted in 1986 dollars, from the first quarter of 1947 until the last quarter of 1996. The simplest imaginable model of the Canadian consumption function would have consumption expenditures as the dependent variable, and a constant and personal disposable income as explanatory variables. Run this regression for the period 1953:1 to 1996:4. What is your estimate of the marginal propensity to consume out of disposable income? 
+	
+	Plot a graph of the OLS residuals for the consumption function regression against time. Does the appearance of the residuals suggest that this model of the consumption function is well specified?
+	
+	\item \textbf{Ex. 1.24 in ETM}: Simulate the consumption function model you have just estimated in the above exercise for the same sample period, using the actual data on disposable income. For the parameters, use the OLS estimates obtained above. For the error terms, use drawings from the $N(0, s^2)$ distribution, where $s^2$ is the estimate of the error variance produced by the regression package.
+	
+	Next, run a regression using the simulated consumption data as the dependent variable and the constant and disposable income as explanatory variables. Are the parameter estimates the same as those obtained using the real data? Why or why not? 
+	
+	Plot the residuals from the regression with simulated data. Does the plot look substantially different from the one obtained using the real data? It should!
+	
+	\item \textbf{Section 2.7 in AGME}: Follow the example on the Capital Asset Pricing Model (CAPM) from AGME (PDF attached titled \textit{CAPM\textunderscore example}) and replicate the tables. The data is available on the \textit{Ecdat} library under \textit{Capm}.
+	
+	For now, do not pay much attention to the discussion on consistency and asymptotic approximations. We will talk about that in the next lecture.
+  	 
+\end{enumerate}
