@@ -1,0 +1,96 @@
+---
+title: "lek_1"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+Sys.setenv(language="en")
+library(magrittr)
+library(tidyverse)
+library(Ecdat)
+```
+
+
+```{r}
+# ex. 3.1
+N <- 100
+n <- 200
+b1 <- 1
+b2 <- 0.8
+y0 <- 0
+list_fits <- list()
+coef1 <- c()
+coef2 <- c()
+for (k in 1:N) {
+u <- rnorm(n)
+y <- c()
+for (i in 2:n) {
+  y[1] <- y0
+  y[i] <- b1 + b2*y[i-1] + u[i]
+}
+
+fit <- lm(y ~ dplyr::lag(y))
+# list_fits[[k]] <- fit
+coef1[k] <- coef(fit)[1]
+coef2[k] <- coef(fit)[2]
+}
+m1 <- mean(coef1)
+m2 <- mean(coef2)
+bias <- c(m1 - b1, m2 - b2)
+
+m1
+m2
+bias
+
+
+```
+
+
+# ex. 2.7
+
+```{r}
+
+data("Capm")
+
+names(Capm)
+
+fit <- lm((rfood-rf) ~ 0 + (rmrf-rf), data = Capm)
+summary(fit)
+fit <- lm((rdur-rf) ~ 0 + (rmrf-rf), data = Capm)
+summary(fit)
+fit <- lm((rcon-rf) ~ 0 + (rmrf-rf), data = Capm)
+summary(fit)
+
+# intercept
+fit <- lm((rfood-rf) ~ (rmrf-rf), data = Capm)
+summary(fit)
+fit <- lm((rdur-rf) ~ (rmrf-rf), data = Capm)
+summary(fit)
+fit <- lm((rcon-rf) ~ (rmrf-rf), data = Capm)
+summary(fit)
+
+ind <- seq(1,nrow(Capm),12)
+data <- Capm %>% mutate(season = as_factor(if_else(row_number() %in% ind, 1, 0)))
+
+fit <- lm((rfood-rf) ~ (rmrf-rf) + season, data = data)
+summary(fit)
+fit <- lm((rdur-rf) ~ (rmrf-rf) + season, data = data)
+summary(fit)
+fit <- lm((rcon-rf) ~ (rmrf-rf) + season, data = data)
+summary(fit)
+
+
+```
+
+
+
+# ex. 2.3
+
+```{r}
+
+data <- rio::import("assets2.dat", setclass = "tbl")
+
+
+```
+
