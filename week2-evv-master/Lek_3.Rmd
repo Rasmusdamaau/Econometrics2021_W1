@@ -1,0 +1,73 @@
+---
+title: "Lek_2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+Sys.setenv(language="en")
+```
+
+
+# opg. 3
+
+```{r}
+results_ny <- list()
+results_nx <- list()
+
+for (i in 1:100) {
+  
+n <- 50
+b_1 <- 1
+b_2 <- 0.8
+u <- rnorm(n)
+x <- rnorm(n,2,2)
+y <- b_1 + b_2*x + u
+u_y <- rnorm(n,0,1)
+u_x <- rnorm(n,0,1)
+y_ny <- y + u_y
+y_nx <- b_1 + b_2*(x+u_x) + u
+nx <- x+u_x
+
+fit_ny <- lm(y_ny~ x)
+results_ny[[i]] <- summary(fit_ny)
+fit_nx <- lm(y ~ nx)
+results_nx[[i]] <- summary(fit_nx)
+
+}
+
+coefs_ny <- lapply(results_ny, coef)
+coefs_nx <- lapply(results_nx, coef)
+
+# coefficient
+mean(unlist(lapply(coefs_ny, function(x) x[2,1])))
+# std. error
+mean(unlist(lapply(coefs_ny, function(x) x[2,2])))
+
+# coefficient
+mean(unlist(lapply(coefs_nx, function(x) x[2,1])))
+# std. error
+mean(unlist(lapply(coefs_nx, function(x) x[2,2])))
+
+```
+
+# opg. 4
+
+```{r}
+
+data <- rio::import("week2-evv-master/classical.csv")
+
+fit_orig <- lm(Y ~ X2 + X3, data)
+summary(fit_orig)
+results <- list()
+for (i in 1:99) {
+  fit_data <- data[sample(nrow(data), replace = T),]
+  fit <- lm(Y ~ X2 + X3, fit_data)
+  results[[i]] <- coef(summary(fit))[3,1]
+}
+unlist(results) %>% quantile(probs = c(0.025, 0.975))
+
+
+
+```
+
