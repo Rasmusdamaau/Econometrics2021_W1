@@ -1,0 +1,40 @@
+---
+title: "Lek_3"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+Sys.setenv(language="en")
+```
+
+
+
+# opgave 2
+
+```{r}
+set.seed(69)
+n <- 30
+b0 <- 1
+b1 <- 1
+x <- rnorm(n,2,2)
+u <- rnorm(n,0,exp(0.6*x))
+y <- b0 + b1*x + u
+
+fit <- lm(y ~ x)
+coef(summary(fit))
+
+
+hcc <- sandwich::vcovHC(fit)
+hcc
+
+(fit$coefficients[2] - 0)/hcc[2,2]
+n_y <- (1/(exp(0.6*x)) * y)
+n_x <- (1/(exp(0.6*x)) * x)
+
+
+fit_2 <- lm(n_y ~ n_x)
+
+summary(fit_2)
+```
+
