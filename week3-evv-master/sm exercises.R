@@ -42,4 +42,4 @@ summary(gls)
 
 ### fgls
 
-resid <- 
+
