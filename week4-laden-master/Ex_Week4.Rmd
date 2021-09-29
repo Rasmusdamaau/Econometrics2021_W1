@@ -1,0 +1,45 @@
+---
+title: "Exercises Week 5"
+author: "Econometrics"
+output: pdf_document
+---
+
+\begin{enumerate}
+
+  \item \textbf{Exercise 8.2 in ETM}: Consider the simple IV estimator computed first with an $n\times K$ matrix $W$ of instrumental variables, and then with another $n\times K$ matrix $WJ$, where $J$ is a $K\times K$ nonsingular matrix. Show that the two estimators coincide. Why does this fact show that $\hat{\beta}_{IV}$ depends on $W$ only through the orthogonal projection matrix $P_W$?
+
+  \item \textbf{Exercise 8.3 in ETM}: Show that, if the matrix of instrumental variables $W$ is $n\times K$, with the same dimensions as the matrix $X$ of explanatory variables, then the generalized IV estimator is identical to the simple IV estimator.
+
+  \item \textbf{Exercise 8.1 in ETM}: Consider a very simple consumption function, of the form $c_i=\beta_1+\beta_2 y_i^*+u_i^*$, with $u_i^*\sim IID(0,\sigma^2)$, where $c_i$ is the logarithm of consumption by household $i$, and $y_i^*$ is the permanent income of household $i$, which is not observed. Instead, we observe current income $y_i$, which is equal to $y_i^*+v_i$, where $v_i\sim IID(0, \omega^2)$ is assumed to be uncorrelated with $y_i^*$ and $u_i$. Therefore, we run the regression $$c_i=\beta_1+\beta_2 y_i + u_i.$$
+  
+  Under the plausible assumption that the true value $\beta_{20}$ is positive, show that $y_i$ is negatively correlated with $u_i$. Using this result, evaluate the $plim$ of the OLS estimator $\hat{\beta}_2$, and show that this $plim$ is less than $\beta_{20}$.
+
+  \item Generate a sample of size 50 from the model 
+	$$y_t = \beta_1+\beta_2 x_t+u_t,$$ 
+	with $\beta_1= 1$ and $\beta_2=1$. For simplicity, assume that $x_t$ are $NID(2,2)$ and that the $u_t$ are $NID(0, 1)$. Now generate a noisy version of the regressor, $x^*_t=x_t+u_{x,t}$, with $u_{x,t}\sim N(0,1)$, and an instrument $w_t = \rho x_t+u_{w,t}$ with $u_{w,t}\sim N(0,1)$ and $\rho$ a value of your choosing between 0 and 1. Estimate the equation $$y_t = \beta_1+\beta_2 x_t^*+u_t,$$ 
+	using OLS and using IV with $w_t$ as an instrument. Also estimate the true OLS equation given by 
+		$$y_t = \beta_1+\beta_2 x_t+u_t.$$ 
+	Store all the different estimates for $\beta_2$.
+	
+	Repeat at least 100 times and plot the empirical distribution function (EDF) for the three different estimates of $\beta_2$, using OLS and IV in the equation with measurement errors and the OLS estimates in the correct specification. Compare the densities and explain the results.
+	
+	What happens to the distribution if you change $\rho$? Explain.
+	
+	Hint: Use the \textit{density()} function from the \textit{stats} package to compute the EDF.
+
+  \item \textbf{Exercises 8.25-27 in ETM}: The dataset \textit{Money} from the \textit{Ecdat} package are described in Exercise 4 on the Exercise Set for Week 4. 
+  
+\begin{enumerate}
+  \item Using these data, estimate the model
+      \begin{equation}\label{eqn:money}
+        m_t = \beta_1 + \beta_2r_t + \beta_3 y_t + \beta_4m_{t-1} + \beta_5 m_{t-2} + u_t
+      \end{equation}
+      by OLS for the period 1968:1 to 1998:4. Then perform a Hausman test for the hypothesis that the interest rate, $r_t$, can be treated as exogenous, using $r_{t-1}$ and $r_{t-2}$ as additional instruments.
+  
+  \item Estimate Equation $(\ref{eqn:money})$ by generalized instrumental variables, treating $r_t$ as endogenous and using $r_{t-1}$ and $r_{t-2}$ as additional instruments. Are the estimates much different from the OLS ones? Are the reported standard errors the same? Explain why or why not.
+  
+  \item Perform a Sargan test of the overidentifying restrictions for the IV estimation you performed above. How do you interpret the results of this test?
+  
+\end{enumerate}
+
+\end{enumerate}
