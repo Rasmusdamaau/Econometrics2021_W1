@@ -1,0 +1,35 @@
+---
+title: "Exercises Week 5"
+author: "Econometrics"
+output: pdf_document
+---
+
+\begin{enumerate}
+
+  \item Suppose that the idiosyncratic errors in the erros-component model, $V_{i,t}$, are serially uncorrelated with constant variance, $\sigma_V^2$. Show that the correlation between adjacent differences, $\Delta V_{i,t}$ and $\Delta V_{i,t+1}$ is -0.5. 
+  
+  Therefore, under the ideal FE assumptions, first differencing induces negative serial correlation of a known value.
+  
+  \item \textbf{Exercise 7.24 in ETM}: Another estimator for panel data that was not discussed in the lecture is the \textbf{between-groups} estimator. It is given by running OLS in the equation
+  $$\bar{Y}_i = \bar{X}_i\beta + \mu_i + \bar{V_{i}},$$
+where $\bar{Z}_i = (1/T)\sum_{t=1}^T Z_{i,t}$ for $Z=Y,X,V$. Let $\mu_i$ have variance $\sigma^2_\mu$ and the $V_{i,t}$ have variance $\sigma^2_V$. Given these assumptions, show that the variance of the error terms in regression above is $\sigma^2_\mu+\sigma^2_V/T$.
+
+Use this development to obtain another estimate for the variances needed to estimate random effects.
+
+Hint: $\bar{Z}_i=P_D Z$, where $D$ is the dummy variables matrix defined in the lecture. 
+  
+  \item For this exercise you are going to use the \textit{Rental} dataset from the \textit{wooldridge} package. The data contains information on rental prices and other variables for college towns are for the years 1980 and 1990. The idea is to see whether a stronger presence of students affects rental rates. The unobserved effects model is
+  $$\log(rent_{it})=\beta_0+\delta_0y90_t+\beta_1\log(pop_{it})+\beta_2\log(avginc_{it})+\beta_3pctsu_{it}+a_i+u_{it},$$
+where $y90_t$ is a dummy for year 90, $pop$ is city population, $avginc$ is average income, and $pctstu$ is student population as a percentage of city population (during the school year).
+\begin{enumerate}
+  \item Estimate the equation by pooled OLS and report the results in standard form. What do you make of the estimate on the 1990 dummy variable? What do you get for $\hat{\beta}_{3}$?
+  
+  \item Now, difference the equation and estimate by OLS. Compare your estimate of $\beta_{pctstu}$ with that from part $(a)$. Does the relative size of the student population appear to affect rental prices?
+  
+  \item Estimate the model by fixed effects to verify that you get identical estimates and standard errors to those in part $(c)$.
+  
+\end{enumerate} 
+
+
+
+\end{enumerate}
