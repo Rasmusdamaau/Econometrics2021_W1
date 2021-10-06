@@ -1,0 +1,46 @@
+---
+title: "Lek_5"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+Sys.setenv(language="en")
+library(data.table)
+library(plm)
+```
+
+# opg. 3
+
+## data
+```{r}
+data <- wooldridge::rental
+
+setDT(data)
+
+lapply(data, summary)
+
+```
+
+## model
+
+```{r}
+
+mod_pooling <- plm(log(rent) ~ y90 + log(pop) + log(avginc) + pctstu,
+           model = "pooling",
+           data = data)
+summary(mod_pooling)
+
+
+mod_fd <- plm(log(rent) ~ y90 + log(pop) + log(avginc) + pctstu,
+           model = "fd",
+           data = data)
+summary(mod_fd)
+
+mod_fixed <- plm(log(rent) ~ y90 + log(pop) + log(avginc) + pctstu,
+           model = "within",
+           data = data)
+summary(mod_fixed)
+
+```
+
