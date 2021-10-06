@@ -31,6 +31,9 @@ mod_pooling <- plm(log(rent) ~ y90 + log(pop) + log(avginc) + pctstu,
            data = data)
 summary(mod_pooling)
 
+mod_pooling_ols <- lm(log(rent) ~ y90 + log(pop) + log(avginc) + pctstu,
+                      data = data)
+summary(mod_pooling_ols)
 
 mod_fd <- plm(log(rent) ~ y90 + log(pop) + log(avginc) + pctstu,
            model = "fd",
@@ -41,6 +44,7 @@ mod_fixed <- plm(log(rent) ~ y90 + log(pop) + log(avginc) + pctstu,
            model = "within",
            data = data)
 summary(mod_fixed)
+
 
 ```
 
