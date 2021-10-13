@@ -1,0 +1,83 @@
+---
+title: "Self-study 1"
+author: "Econometrics"
+output: pdf_document
+---
+
+\begin{enumerate}
+
+  
+\item \textbf{FD and FE when $T=2$}: For $T=2$ consider the standard unobserved effects model 
+  $$y_{i,t}=x_{i,t}\beta+u_{i,t},\quad i=1,\cdots,N,\quad t=1,2.$$
+Let $\hat{\beta}_{FE}$ and $\hat{\beta}_{FD}$ denote the fixed effects and first difference estimators, respectively. 
+
+\begin{enumerate}
+
+\item Show that the FE and FD estimates are numerically identical.
+
+\item Show that the variance matrix estimates from the FE and FD methods are numerically identical.
+
+Use the consistent estimator for $\sigma_u^2$ given by $\hat{\sigma}_u^2 = RSS/(N(T-1)-K)$, with $RSS$ the residual sum of squares and $K$ the number of regressors.
+
+\end{enumerate}
+
+*The results above do not hold for $T>2$.
+
+  	\item \textbf{Differences-in-differences} 
+  	 
+  	 In this exercise, you are going to study the differences-in-differences (DiD) estimator, a useful form of panel data models further. 
+  	
+  	\textbf{Reading material:} From Moodle, read Chapter 5 of \textit{Mostly Harmless Econometrics} to get a better understanding of DiD estimation. As complementary literature, you can read \textit{Impact evaluation using DiD} (also available in Moodle).
+  	
+  	 \textbf{Background:} One of the most famous uses of DiD is by Card and Krueger (1994)* (attached) on the effect of increasing the minimum wage on unemployment. You are going to replicate some of their results.
+  	
+  	*Card was awarded the Nobel prize in Economics \underline{this week} for this and related articles. Krueger died on 2019 and they do not award the Nobel prize posthumously.
+  	
+  	  \textbf{Exercise:} On April 1, 1992, the minimum wage in New Jersey was raised from \$4.25 to \$5.05. In the neighbouring state of Pennsylvania, however, the minimum wage remained constant at \$4.25. Card and Krueger (1994) analyze the impact of the minimum wage increase on employment in the fast–food industry, since this is a sector which employs many low-wage workers.
+  	  	  
+  The authors collected data on the number of employees in 331 fast–food restaurants in New Jersey and 79 in Pennsylvania. The survey was conducted in February 1992 (before the minimum wage was raised) and in November 1992 (after the minimum wage was raised). 
+  
+  The dataset \textit{m\_wage.csv} (attached) includes the information necessary to replicate the Card and Krueger analysis. The dataset is stored in a ``wide'' format, i.e. there is a single row for each unit (restaurant), and different columns for the outcomes and covariates in different years. The dataset includes the following variables (as well as some others which we will not use):
+  
+  \begin{itemize}
+  \item	nj – a dummy variable equal to 1 if the restaurant is located in New Jersey
+  \item emptot – the total number of full-time employed people in the pre-treatment period
+  \item emptot2 – the total number of full-time employed people in the post-treatment period
+  \item wage\_st – a variable measuring the average starting wage in the restaurant in the pre-treatment period
+  \item wage\_st2 – a variable measuring the average starting wage in the restaurant in the post-treatment period
+  \item pmeal – a variable measuring the average price of a meal in the pre-treatment period
+  \item pmeal2 – a variable measuring the average price of a meal in the post-treatment period
+  \item	co\_owned – a dummy variable equal to 1 if the restaurant was co-owned
+  \item	bk – a dummy variable equal to 1 if the restaurant was a Burger King
+  \item	kfc – a dummy variable equal to 1 if the restaurant was a KFC
+  \item	wendys – a dummy variable equal to 1 if the restaurant was Wendys
+  \end{itemize}
+  
+  
+  	  
+  	  \begin{enumerate}
+  	  	
+  	  	  \item Calculate the DiD estimate for the average wage in NJ and PA. Noting that the wage is not the outcome of interest in this case, what does this analysis suggest about the effectiveness of the minimum-wage policy?
+  	  	  
+  	  	  *Note that there are some observations with missing data in this exercise (these are coded as NA in the data). You can calculate the mean of a vector with missing values by setting the \textit{na.rm} argument to be equal to TRUE in the mean function.
+  	  	  
+  	  	  Hint: To compute DiD, you need to compute the difference in average wages in the pre-treatment period for NJ and PA. Do the same for the post-treatment period. Then compute the difference between pre- and post-treatment periods.
+  	  	  
+  	  	  \item Calculate the DiD estimator for the outcome of interest (the number of full-time employees). 
+  	  	  
+  	  	  \item Calculate the DiD estimator for the price of an average meal. Do restaurants that were subject to a wage increase raise their prices for fast–food?
+  	  	  
+  	  	  \item Convert the dataset from a ``wide'' format to a ``long'' format (i.e. where you have two observations for each restaurant, and an indicator for the time period in which the restaurant was observed). 
+  	  	  
+  	  	  *Note: The easiest way to achieve the data conversion is to notice that you can simply ``stack'' one \textit{data.frame} (with information from the pre-treatment period) on top of another \textit{data.frame} (with information from the post-treatment period). So, first create two \textit{data.frame}s with the relevant variables. Second, bind these two \textit{data.frame}s together using the \textit{rbind()} function (the \textit{data.frame}s must have the same column names before they are joined). Note that you will have to create the relevant treatment period indicator before binding the \textit{data.frame}s together.
+  	  	  
+  	  	  \item Estimate DiD using linear regression. You should run two models: one which only includes the relevant variables to estimate the DiD, and one which additionally includes restaurant-level covariates which do not vary over time (kfc, wendys,co\_owned). Do your estimates of the treatment effect differ?
+
+
+  
+
+  	\end{enumerate}
+
+
+
+\end{enumerate}
