@@ -1,0 +1,60 @@
+---
+title: "Exercises Week 7"
+author: "Econometrics"
+output: pdf_document
+---
+
+\begin{enumerate}
+
+\item \textbf{SUR with same regressors}: Show that SUR estimation is numerically identical to OLS estimation when all equations share the same regressors, $X_1=X_2=\cdots=X_g$.
+
+You may use these properties of the Kronecker product: 
+$$(A\otimes B)^T = A^T\otimes B^T,$$
+$$(A\otimes B)(C\otimes D) = (AC)\otimes(BD),$$
+$$(A\otimes B)^{-1} = A^{-1}\otimes B^{-1}.$$
+
+   
+\item \textbf{SUR's efficiency}: Generate a sample of size 100 from the model 
+	$$y_{1,t} = \beta_{1} x_{1,t}+u_{1,t},$$
+	$$y_{2,t} = \beta_{2} x_{2,t}+u_{2,t},$$
+	
+	with $\beta_{1} = 2$, and $\beta_{2}=0.5$. For simplicity, assume that $x_{1,t}$ and $x_{2,t}$ are $NID(2,2)$ independent from each other, and that the $[u_{1,t},u_{2,t}]^T\sim MVNID( [0,0]^T, [1, \rho;\rho,1])$; that is, the errors are sample from a multivariate normal with correlation $\rho$, a value of your choosing between 0 and 1. 
+	
+	\begin{enumerate}
+	 \item Estimate both equations one by one using OLS. Report the value of $\hat{\beta}_{1}^{OLS}$, and $\hat{\beta}_{2}^{OLS}$, and their standard deviation.
+  
+   \item Now estimate the parameters using SUR. Report the value of the estimates and their standard deviation.
+  
+   \item Repeat at least 1000 times and plot the empirical distribution function (EDF) for the estimates of $\hat{\beta}_{1}^{OLS}$ and $\hat{\beta}_{1}^{SUR}$. Compare the densities and explain the results. Do the same for $\hat{\beta}_{2}^{OLS}$ and $\hat{\beta}_{2}^{SUR}$.
+	
+  	\item What happens to the distributions if you change $\rho$? Explain.
+	
+	\end{enumerate}
+	
+\item \textbf{SUR in CAPM}: The $Capm$ data set in the $Ecdat$ package contains data on stock prices for 3 industries and the market portfolio. 
+
+  \begin{enumerate}
+
+  \item Regress the excess returns on your three stocks upon the excess return on the market portfolio (proxy), noting that this corresponds to the CAPM. Use three OLS for these regressions and include a constant. Report the estimates and their standard deviation.
+
+  \item Estimate the three equations at once using a SUR. Report the estimates and their standard deviation. Compare them against the previously obtained.
+
+  \item Test the CAPM by testing that the estimates for the constant terms are all zero using the SUR.
+	\end{enumerate}
+	
+
+\item \textbf{Investment equation}: Grunfeld (1958) considered the following investment equation: 
+	$$I_{it}=\alpha+\beta_{1}F_{it}+\beta_2C_{it}+u_{it}$$
+where $I_{it}$ denotes real gross investment for firm $i$ in year $t$, $F_{it}$ is the real value of the firm (shares outstanding) and $C_{it}$ is the real value of the capital stock. The data set consists of 10 large U.S. manufacturing firms over 20 years, 1935–1954. The data is contained in $Grunfeld$ in the $Ecdat$ package.
+
+Consider the first three firms: G.M., U.S. Steel and General Electric.
+
+  \begin{enumerate}
+  \item Run OLS of $I$ on a constant, $F$ and $C$ for each of the 3 firms separately. Print the covariance matrix of the estimates.
+  \item Run SUR for the first two firms. Compare with OLS.
+  \item Run SUR for the three assigned firms. Compare these results with those above.
+  \item Test for the diagonality of $\Sigma$ across these three equations.
+  \item Test for the equality of all coefficients across the 3 firms.
+  \end{enumerate}
+
+\end{enumerate}
