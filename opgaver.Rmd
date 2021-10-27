@@ -85,7 +85,18 @@ mod_1 <- lm(rfood ~ rmrf, capm)
 mod_2 <- lm(rdur ~ rmrf, capm)
 mod_3 <- lm(rcon ~ rmrf, capm)
 
+coef(summary(mod_1))
+coef(summary(mod_2))
+coef(summary(mod_3))
 
+fit_1 <- rfood ~ rmrf
+fit_2 <- rdur ~ rmrf
+fit_3 <- rcon ~ rmrf
 
+sur_mod <- systemfit::systemfit(list(fit_1,fit_2,fit_3), method = "SUR", data = capm)
+
+coef(summary(sur_mod))
+
+summary(sur_mod)
 ```
 
