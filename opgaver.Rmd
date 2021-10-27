@@ -1,0 +1,91 @@
+---
+title: "opgaver"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+Sys.setenv(language = "en")
+library(data.table)
+library(ggplot2)
+library(magrittr)
+```
+
+
+# opg. 2
+
+```{r}
+result <- list(ols_b_hat_1 = 0, ols_b_hat_2 = 0, sur_b_hat_1 = 0, sur_b_hat_2 = 0)
+
+
+for (i in 1:1000) {
+  
+  
+  n <- 100
+  rho <- -0.9
+  b_1 <- 2
+  b_2 <- 0.5
+  
+  x_1 <- rnorm(n,2,2)
+  x_2 <- rnorm(n,2,2)
+  
+  u <- MASS::mvrnorm(n, c(0,0), matrix(c(1,rho,rho,1), nrow = 2, ncol = 2))
+  
+  y_1 <- b_1 * x_1 + u[,1]
+  y_2 <- b_2 * x_2 + u[,2]
+  
+  mod_1 <- lm(y_1 ~ 0 + x_1)
+  mod_2 <- lm(y_2 ~ 0 + x_2)
+  
+  
+  ols_b_hat_1 <- coef(mod_1)
+  ols_b_hat_2 <- coef(mod_2)
+  
+  fit_1 <- y_1 ~ 0 + x_1
+  fit_2 <- y_2 ~ 0 + x_2
+  
+  sur_mod <- systemfit::systemfit(list(fit_1,fit_2), method = "SUR")
+  
+  sur_b_hat_1 <- coef(sur_mod)[1]
+  sur_b_hat_2 <- coef(sur_mod)[2]
+  temp_result <- data.table(ols_b_hat_1 = ols_b_hat_1,
+                            ols_b_hat_2 = ols_b_hat_2,
+                            sur_b_hat_1 = sur_b_hat_1,
+                            sur_b_hat_2 = sur_b_hat_2)
+  
+  result <- rbindlist(list(temp_result,result))
+}
+
+result <- result[-1001]
+
+ggplot(data = result) +
+  geom_density(aes(x = ols_b_hat_1)) +
+  geom_density(aes(x = sur_b_hat_1), color = "blue")
+
+ggplot(data = result) +
+  geom_density(aes(x = ols_b_hat_2)) +
+  geom_density(aes(x = sur_b_hat_2), color = "blue")
+
+
+
+```
+
+
+# opg. 3
+
+```{r}
+
+library(Ecdat)
+
+
+capm <- Ecdat::Capm
+setDT(capm)
+
+mod_1 <- lm(rfood ~ rmrf, capm)
+mod_2 <- lm(rdur ~ rmrf, capm)
+mod_3 <- lm(rcon ~ rmrf, capm)
+
+
+
+```
+
