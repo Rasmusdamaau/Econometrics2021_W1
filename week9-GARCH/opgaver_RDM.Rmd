@@ -5,24 +5,36 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+Sys.setenv(language = "en")
+library(quantmod)
+library(rugarch)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Exercise 2
 
-```{r cars}
-summary(cars)
+```{r}
+getSymbols("^GSPC", from = "2005-01-01", to = "2014-12-31", src = "yahoo")
+
+sp500 <- xts( diff( log( GSPC[,6] ) )[-1] )
+y <- as.numeric(sp500)
+result_object <- ugarchspec(variance.model = list(model = "sGARCH",
+                                                  garchOrder = c(1,1)),
+                            mean.model = list(armaOrder = c(2,0)),
+                            distribution.model = "norm")
+garch_est <- ugarchfit(spec = result_object, data = y)
+# opgave 1
+acf(y)
+acf(y^2)
+
+result_object <- ugarchspec(variance.model = list(model = "sGARCH",
+                                                  garchOrder = c(0,2)),
+                            mean.model = list(armaOrder = c(3,0)),
+                            distribution.model = "norm")
+garch_est <- ugarchfit(spec = result_object, data = y)
+
+
+
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
