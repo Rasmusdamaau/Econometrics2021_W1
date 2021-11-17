@@ -1,0 +1,38 @@
+---
+title: "selfstudy_2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+Sys.setenv(language = "en")
+library(magrittr)
+library(data.table)
+library(aTSA)
+library(forecast)
+
+```
+
+
+# 1. kointegration og fejlkorrektion
+
+```{r}
+
+data <- rio::import("week10-selfstudy/renter.csv")
+
+y <- data$y
+z <- data$z
+
+
+
+plot(y)
+plot(z)
+
+acf(y,lag.max = 150)
+adf_y <- adf.test(y)
+adf_z <- adf.test(z)
+
+
+auto.arima
+```
+
