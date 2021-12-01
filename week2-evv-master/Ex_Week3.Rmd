@@ -1,7 +1,9 @@
 ---
 title: "Exercises Week 3"
 author: "Econometrics"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 \begin{enumerate}
