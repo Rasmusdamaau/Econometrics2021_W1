@@ -1,0 +1,29 @@
+---
+title: "Exercises Week 12"
+author: "Econometrics"
+output: pdf_document
+---
+
+\begin{enumerate}
+
+\item Using an analogous derivation to the one shown during the lecture, you are going to prove that GMM reduces to the OLS estimator under the orthogonality assumption. That is, assume a model given by $y=x\beta+e$, where $E(x'e)=0$. 
+
+Note: We assume that the columns of $x$ are linearly independent, and we use any symmetric definite positive weight matrix $W$.
+
+\item \textbf{Exercises 9.14 in ETM}: Suppose that $g_n(\beta) =y_t-x_t\beta$. Show that, in this special case, the estimating equations (or first order conditions for GMM) given by
+$$G_n'(\hat{\beta})W_ng_n(\hat{\beta}) = 0,$$
+yield the generalized IV estimator.
+
+Note that for the linear case, the symmetric and definite positive matrix of instruments $W_n$ is given by the projection matrix $P_W$.
+
+
+\item \textbf{Exercise 9.3 in ETM}: Consider the quadratic form $x'Ax$, where $x$ is a $p\times 1$ vector and $A$ is a $p\times p$ matrix, which may or may not be symmetric. Show that there exists a symmetric $p\times p$ matrix $B$ such that $x'Bx=x'Ax$ for all $p\times 1$ vectors $x$, and give the explicit form of a suitable $B$.
+
+Hint: Note that $x'Ax$ is a scalar, and hence symmetric.
+
+\item Follow the Illustrative Example on Estimating Intertemporal Asset
+Pricing Models on the file on Moodle and replicate Table 5.4
+
+Note: The data for the exercise is available in the $Ecdat$ package under the name $Pricing$.
+
+\end{enumerate}
